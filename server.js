@@ -33,16 +33,16 @@ timeService.startTimeInterval()
 
 
 const port = process.env.PORT || 3030
-http.listen(port, () => console.log('Server is running on port: ' + port))
 
 app.use('/api/fc', fcRoutes)
 app.use('/api/alarm', alarmRouts)
 app.use('/api/user', userRouts)
 
 app.get('/**', (req, res) => {
- res.sendFile(path.join(__dirname, 'public', 'index.html'))
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
+http.listen(port, () => console.log('Server is running on port: ' + port))
 
 
 
