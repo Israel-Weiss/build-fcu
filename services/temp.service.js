@@ -30,18 +30,18 @@ async function _setTowerTemp(towerName) {
 }
 
 function _createTemp(val, sp) {
-    let num = _getRandomIntInclusive(1, 20)
+    let num = _getRandomIntInclusive(1, 60)
     const interval = Math.abs(val - sp)
-    if (interval < 3) return _getNextTemp(num, val)
-    if ((interval > 5) && (num < 18)) return val
+    if (interval < 2) return _getNextTemp(num, val)
+    if ((interval > 5) && (num < 54)) return val
     return sp
 }
 
 function _getNextTemp(num, val) {
     let newVal
-    if (num < 8) newVal = val + 1
-    else if (num < 14) newVal = val - 1
-    else if (num < 20) newVal = val
+    if (num < 24) newVal = val + 1
+    else if (num < 42) newVal = val - 1
+    else if (num < 60) newVal = val
     else newVal = _getRandomIntInclusive(0, 50)
     return newVal
 }

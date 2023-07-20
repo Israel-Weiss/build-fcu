@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon --ignore \"./data\" server.js"
+    "start": "nodemon --ignore \"./data\" server.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",

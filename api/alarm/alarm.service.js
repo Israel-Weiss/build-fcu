@@ -10,7 +10,8 @@ module.exports = {
     endAlarm,
     endAll,
     ackAlarm,
-    ackAll
+    ackAll,
+    startAckInterval
 }
 
 async function query() {
@@ -86,6 +87,14 @@ async function ackAll() {
     }
 }
 
+let intervalId
+async function startAckInterval() {
+    if (intervalId) clearInterval(intervalId)
+    intervalId = setInterval(async () => {
+        await ackAll()
+        socketService.emitRender('alarm')
+    }, 30 * 60 * 1000)
+}
 
 function _createTempAlarm(towerName, fc, typeAlarm) {
     const alarmDescription = typeAlarm === 'high' ? 'High temperature' : 'Low temperature'
