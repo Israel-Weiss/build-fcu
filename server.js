@@ -11,7 +11,6 @@ const fcRoutes = require('./api/fc/fc.routes')
 const alarmRouts = require('./api/alarm/alarm.routes')
 const userRouts = require('./api/user/user.routes')
 const { setupSocketAPI } = require('./services/socket.service')
-const { log } = require('console')
 const app = require('express')()
 const http = require('http').createServer(app)
 
@@ -20,18 +19,20 @@ app.use(cookieParser())
 app.use(express.static('public'))
 setupSocketAPI(http)
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve(__dirname, 'public')))
-} else {
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.resolve(__dirname, 'public')))
+// } else {
 
-    app.use(express.static(path.resolve(__dirname, 'public')))
+//     // app.use(express.static(path.resolve(__dirname, 'public')))
 
-    // const corsOptions = {
-    //     origin: ['http://127.0.0.1:5173', 'http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
-    //     credentials: true
-    // }
-    // app.use(cors(corsOptions))
-}
+//     const corsOptions = {
+//         origin: ['http://127.0.0.1:5173', 'http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
+//         credentials: true
+//     }
+//     app.use(cors(corsOptions))
+// }
+app.use(cors())
+app.use(express.static(path.resolve(__dirname, 'public')))
 
 tempService.startTempInterval()
 timeService.startTimeInterval()
